@@ -1,13 +1,10 @@
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
 const { Unit } = require('./db');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-const APP_PORT = 3001;
 
 /**
  * Handler to send the entire current list
