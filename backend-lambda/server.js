@@ -1,10 +1,5 @@
-const express = require('express');
 const cors = require('cors');
 const { Unit } = require('./db');
-
-const app = express();
-app.use(cors());
-app.use(express.json());
 
 /**
  * Handler to send the entire current list
