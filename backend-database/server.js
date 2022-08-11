@@ -24,7 +24,6 @@ app.post('/unit', async (req, res) => {
     const { unitName } = req.body;
 
     await Unit.forge({
-        id: uuidv4(),
         name: unitName,
     }).save();
 
