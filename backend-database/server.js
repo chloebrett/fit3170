@@ -25,7 +25,7 @@ app.post('/unit', async (req, res) => {
 
     await Unit.forge({
         name: unitName,
-    });
+    }).save();
 
     res.sendStatus(200);
 });
