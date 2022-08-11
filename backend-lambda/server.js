@@ -39,7 +39,7 @@ module.exports.unitCreate = async (event) => {
 module.exports.unitDelete = async (event) => {
     const { unitId } = JSON.parse(event.body);
 
-    await Unit({ id: unitId }).destroy();
+    await new Unit({ id: unitId }).destroy();
 
     return wrapResponse('');
 };
