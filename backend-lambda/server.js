@@ -37,7 +37,7 @@ module.exports.unitCreate = async (event) => {
  * Handler to remove a unit with a given ID
  */
 module.exports.unitDelete = async (event) => {
-    const { unitId } = req.body;
+    const { unitId } = JSON.parse(event.body);
 
     await Unit({ id: unitId }).destroy();
 
