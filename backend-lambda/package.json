@@ -8,5 +8,8 @@
     "knex": "^2.2.0",
     "pg": "^8.7.3",
     "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "deploy": "cp ../backend-database/dbconfig.json dbconfig.json && serverless deploy"
   }
 }
