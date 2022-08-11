@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-  knex.schema.createTable('units', (table) => {
+  return knex.schema.createTable('units', (table) => {
     table.uuid('id').primary();
     table.string('name').notNullable();
   });
