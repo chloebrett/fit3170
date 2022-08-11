@@ -1,4 +1,4 @@
-const dbConfig = require('../dbconfig.json');
+const dbConfig = require('./dbconfig.json');
 
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
