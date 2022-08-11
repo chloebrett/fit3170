@@ -29,5 +29,10 @@ yarn
 cd ../backend-database
 yarn
 
+# install back end deps (lambda version)
+
+cd ../backend-lambda
+yarn
+
 # go back to main folder
 cd ..
