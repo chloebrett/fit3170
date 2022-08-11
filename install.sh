@@ -9,6 +9,9 @@ npm i -g yarn
 # install serve (for running front end)
 npm i -g serve
 
+# install knex (for back end DB)
+npm i -g knex
+
 # install front end deps
 cd frontend
 yarn
