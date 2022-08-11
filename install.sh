@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # install node
 yum install -y nodejs
