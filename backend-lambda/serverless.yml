@@ -9,12 +9,21 @@ functions:
   unitsGet:
     handler: server.unitsGet
     events:
-      - httpApi: 'GET /units'
+      - http:
+          path: units
+          method: get
+          cors: true
   unitCreate:
     handler: server.unitCreate
     events:
-      - httpApi: 'POST /unit'
+      - http:
+          path: unit
+          method: post
+          cors: true
   unitDelete:
     handler: server.unitDelete
     events:
-      - httpApi: 'POST /delete-unit'
+      - http:
+          path: delete-unit
+          method: post
+          cors: true
