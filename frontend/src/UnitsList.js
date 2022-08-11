@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import config from './config.json';
 
-const SERVER_URL = `${config.host}:6789`;
+const SERVER_URL = `${config.host}:3001`;
 
 function UnitsList() {
   const [units, setUnits] = useState([]);

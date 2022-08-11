@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 const FILENAME = 'persisted-data.json';
-const APP_PORT = 6789;
+const APP_PORT = 3001;
 
 const getPersisted = async () => {
     const fileData = (await fs.readFile(FILENAME)).toString();
