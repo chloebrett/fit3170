@@ -7,11 +7,14 @@ provider:
  
 functions:
   unitsGet:
+    handler: server.unitsGet
     events:
       - httpApi: 'GET /units'
   unitCreate:
+    handler: server.unitCreate
     events:
       - httpApi: 'POST /unit'
   unitDelete:
+    handler: server.unitDelete
     events:
       - httpApi: 'POST /delete-unit'
