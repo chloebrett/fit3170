@@ -1,6 +1,6 @@
 // Setting up the database connection
 const dbConfig = require('./knexfile.js');
-const knex = require("knex")(dbConfig.development);
+const knex = require("knex")({ ...dbConfig.development, debug: true, });
 const bookshelf = require("bookshelf")(knex);
 
 // Defining models
