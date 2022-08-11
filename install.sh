@@ -1,13 +1,8 @@
 #!/bin/bash
 
 # install node
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-nvm install 16
-
-# Load nvm immediately
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
+sudo yum install -y nodejs
 
 # install yarn
 npm i -g yarn
