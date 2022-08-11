@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # install node
-yum install -y nodejs
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+nvm install 16
 
 # install yarn
 npm i -g yarn

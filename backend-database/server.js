@@ -35,7 +35,7 @@ app.post('/unit', async (req, res) => {
 app.post('/delete-unit', async (req, res) => {
     const { unitId } = req.body;
 
-    await Unit({ id: unitId }).destroy();
+    await new Unit({ id: unitId }).destroy();
 
     res.sendStatus(200);
 });
