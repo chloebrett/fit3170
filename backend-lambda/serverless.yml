@@ -1,0 +1,17 @@
+service: units
+
+provider:
+  name: aws
+  stage: development
+  region: ap-southeast-2
+ 
+functions:
+  unitsGet:
+    events:
+      - httpApi: 'GET /units'
+  unitCreate:
+    events:
+      - httpApi: 'POST /unit'
+  unitDelete:
+    events:
+      - httpApi: 'POST /delete-unit'

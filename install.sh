@@ -12,6 +12,9 @@ npm i -g serve
 # install knex (for back end DB)
 npm i -g knex
 
+# install serverless framework (for lambda)
+npm i -g serverless
+
 # install front end deps
 cd frontend
 yarn
