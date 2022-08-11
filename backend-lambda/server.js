@@ -1,15 +1,23 @@
 const { Unit } = require('./db');
 
+function wrapResponse(res) {
+    return {
+        statusCode: 200,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true,
+        },
+        body: JSON.stringify(res),
+    }
+}
+
 /**
  * Handler to send the entire current list
  */
 module.exports.unitsGet = async (event) => {
     const units = await Unit.fetchAll();
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(units),
-    };
+    return wrapResponse(units);
 }
 
 /**
@@ -22,10 +30,7 @@ module.exports.unitCreate = async (event) => {
         name: unitName,
     }).save();
 
-    return {
-        statusCode: 200,
-        body: '',
-    }
+    return wrapResponse('');
 };
 
 /**
@@ -36,8 +41,5 @@ module.exports.unitDelete = async (event) => {
 
     await Unit({ id: unitId }).destroy();
 
-    return {
-        statusCode: 200,
-        body: '',
-    }
+    return wrapResponse('');
 };
