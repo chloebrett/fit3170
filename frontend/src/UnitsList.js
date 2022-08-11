@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { host as HOST } from '../../config.json';
+import { host as HOST } from './config.json';
 
 const SERVER_URL = `${HOST}:6789`;
 
