@@ -1,4 +1,3 @@
-const cors = require('cors');
 const { Unit } = require('./db');
 
 /**
