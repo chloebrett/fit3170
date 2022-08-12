@@ -20,7 +20,7 @@ Let's fix all of these problems now.
 10. I repeat, the above is very important to get right - it's easy to get wrong and if you do, your instance won't be reachable. See the photo below for what they should look like after.
 11. Finally, click "save rules". This fixes problem #2.
 
-![Inbound rules](./images/inbound-rules.png)
+![Inbound rules](../images/inbound-rules.png)
 
 Now let's fix problem #3:
 
@@ -31,7 +31,7 @@ Now let's fix problem #3:
 
 This is what the `config.json` file should look like:
 
-![Front end config file](./images/config-fe.png)
+![Front end config file](../images/config-fe.png)
 
 You should now be able to visit the URL you saved before (with the :3000 after it) and view the app!
 

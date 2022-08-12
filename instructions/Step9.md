@@ -9,7 +9,7 @@ Here's how we can replace the back end with a serverless version:
 
 This will take a little while. Once it's done, you should get an output something like this:
 
-![Serverless output](./images/serverless-output.png)
+![Serverless output](../images/serverless-output.png)
 
 Copy one of the endpoints to your clipboard, without the /units path at the end. For example:
 

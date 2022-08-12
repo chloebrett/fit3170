@@ -30,7 +30,7 @@ Here's how to connect the back end up to the DB, once your DB is running:
 
 It should look something like this:
 
-![DB config file](./images/config-db.png)
+![DB config file](../images/config-db.png)
 
 Now get the database-capable back end running:
 
