@@ -42,4 +42,4 @@ Now you can visit the same front end as before, and it will access the new back 
 
 There is one more missing link before we can retire the server entirely - the back end is still running on it! In fact it is possible for this app to run everything without explicitly handling servers ourselves, and that's what we'll do in the next step.
 
-Next: [Running the back end serverlessly with Lambda](./instructions/Step9.md)
+Next: [Running the back end serverlessly with Lambda](./Step9.md)

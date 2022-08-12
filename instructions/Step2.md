@@ -12,4 +12,4 @@ Now we're going to launch a server which can host both the front end and back en
 8. Click "view all instances".
 9. Wait for the instance to launch - this should only take a minute or so.
 
-Next: [Installing the app on the server](./instructions/Step3.md)
+Next: [Installing the app on the server](./Step3.md)

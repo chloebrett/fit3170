@@ -10,4 +10,4 @@ We now need to log in to the server and set it up with our app.
 6. Navigate into the repository: `cd fit3170`. Note that from now on, when I say to navigate to a particular folder, assume it is defined relative to the repository root. For example "navigate to `backend-json`" means go to the folder with absolute path `/home/ec2-user/fit3170/backend-json`. You can see your absolute path at any point with the `pwd` command.
 7. Run the install script: `sudo ./install.sh`. This installs a number of dependencies required by the app.
 
-Next: [Running the app](./instructions/Step4.md)
+Next: [Running the app](./Step4.md)

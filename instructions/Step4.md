@@ -36,4 +36,4 @@ ERROR: Cannot copy server address to clipboard: Couldn't find the `xsel` binary 
 
 Ignore the error, it's not a problem. As for the URL you were given, for example http://172.31.32.185:3000, copy-paste it into your clipboard and paste it into your browser! Does it work?
 
-Next: [Accessing the app](./instructions/Step5.md)
+Next: [Accessing the app](./Step5.md)

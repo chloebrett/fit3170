@@ -39,4 +39,4 @@ That's it for the first part - we now have the app running on a server!
 
 Next up is hosting the front end as a static website on S3 - but first, let's give EC2 some extra permissions so that everything else works smoothly.
 
-Next: [Giving EC2 some extra permissions](./instructions/Step6.md)
+Next: [Giving EC2 some extra permissions](./Step6.md)

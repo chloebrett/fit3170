@@ -37,4 +37,4 @@ Then, upload the front end to the bucket for hosting:
 
 Cool - so now we have the back end running on EC2 still, and saving things to a local JSON file, while the front end is statically hosted on S3. Nice! Next up is to improve reliability by storing data on a remote database instead of just in a JSON file - so that if our server dies, we can just replace it with another one that connects to the same database, and no data will be lost!
 
-Next: [Replacing the JSON file store with an actual database](./instructions/Step8.md)
+Next: [Replacing the JSON file store with an actual database](./Step8.md)

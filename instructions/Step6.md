@@ -24,4 +24,4 @@ Here's how we do it:
 14. Select the "ec2admin" role you created
 15. Click "update IAM role"
 
-Next: [Creating the S3 bucket and hosting the front end in it](./instructions/Step7.md)
+Next: [Creating the S3 bucket and hosting the front end in it](./Step7.md)
