@@ -149,8 +149,12 @@ Now let's fix problem #3:
 
 1. Go back to your front end shell (the second instance connect window you opened).
 2. Hit ctrl+C to stop the front end from being served so you can go back to running commands.
-3. Type `nano src/config.json` (feel free to use another editor such as `vim` if you prefer) and edit the config so that the host value matches exactly the URL you pasted into your browser with the public DNS - including the :3000 at the end. Make sure there is an http:// at the start as well. Once done, hit ctrl+X then 'y' then enter to save the file.
+3. Type `nano src/config.json` (feel free to use another editor such as `vim` if you prefer) and edit the config so that the host value matches exactly the URL you pasted into your browser with the public DNS - except that instead of `:3000` at the end, we want `:3001` since this is the back end URL. We are doing this in order to point the front end to the back end correctly. Make sure there is an http:// at the start as well. Once done, hit ctrl+X then 'y' then enter to save the file.
 4. Re-build and re-serve the front end with `sudo yarn serve` again.
+
+This is what the `config.json` file should look like:
+
+![Front end config file](./images/config-fe.png)
 
 You should now be able to visit the URL you saved before (with the :3000 after it) and view the app!
 
@@ -184,8 +188,9 @@ Here's how we do it:
 14. Select the "ec2admin" role you created
 15. Click "update IAM role"
 
-
 ## Step 7: Creating the S3 bucket and hosting the front end in it
+
+To create the bucket and enable static web hosting:
 
 1. Go to the S3 console (via searching "S3" in the top search bar)
 2. Click "Create bucket"
@@ -194,3 +199,156 @@ Here's how we do it:
 5. Untick the "block all public access" checkbox
 6. Tick "I acknowledge" 
 7. Leave the other settings as default and click "create bucket"
+8. Click the bucket you just created
+9. Click "properties"
+10. Scroll to the bottom where it says "static website hosting"
+11. Click "edit" then select "enable"
+14. Type "index.html" for the index document
+15. Leave the other values as default
+16. On the properties panel, the “static website hosting” should now have a “bucket website endpoint”. Click this to open this in a new tab. We haven't uploaded the web app or properly set permissions yet so you'll get a 403 error - but keep this tab open as we'll use it later.
+
+Next, change the bucket policy to allow access to all objects:
+
+1. Go to the permissions tab in the bucket -> bucket policy -> edit
+2. Paste the following, replacing "example-bucket" with your bucket name:
+
+```
+{ "Version":"2012-10-17", "Statement":[{ "Sid":"PublicReadGetObject", "Effect":"Allow", "Principal": "*", "Action":["s3:GetObject"], "Resource":["arn:aws:s3:::example-bucket/*"] }] }
+```
+
+Make sure to leave the "/*" at the end of the bucket name. Save the policy.
+
+Then, upload the front end to the bucket for hosting:
+
+1. Go back to your front end shell session
+2. Stop the front end from running if it's running (ctrl+C)
+3. Run `aws s3 cp --recursive build s3://example-bucket`, replacing `example-bucket` with your bucket name. This will upload the `build` folder to S3.
+4. Go to the page where you opened the static website before and refresh it - it should work now!
+
+Cool - so now we have the back end running on EC2 still, and saving things to a local JSON file, while the front end is statically hosted on S3. Nice! Next up is to improve reliability by storing data on a remote database instead of just in a JSON file - so that if our server dies, we can just replace it with another one that connects to the same database, and no data will be lost!
+
+## Step 8: Replacing the JSON file store with an actual database
+
+Here's what we need to do to add a database:
+
+1. Search “rds” in the main aws search bar to go to the RDS console (RDS stands for Relational Database Service)
+2. Select “instances”
+3. Select “create database”
+4. Select "standard create"
+5. Select "postgresql"
+6. DB instance size should be “free tier”
+7. Call the DB whatever you like
+8. Leave master username as "postgres"
+9. Make the password "postgres" as well for simplicity (this is how the back end is configured to access it) - obviously in production a more complex password would be used.
+10. Leave the storage as default
+11. Use the default VPC and subnet group
+12. Important: set "public access" to "YES"
+13. Leave the VPC security group and availability zone as default
+14. Leave the authentication as default
+15. Click “create database”!
+16. This can take a little while (2-3 mins) - unfortunately we do need to know the endpoint before we can configure the back end to connect to the database. So while everyone's databases boot up, I'll go around the room (and the Zoom) to make sure everyone's caught up.
+
+Here's how to connect the back end up to the DB, once your DB is running:
+
+1. From the RDS management console, click your DB
+2. In the "connectivity & security" tab (the default one), there is an "endpoint" listed. Copy it to your clipboard
+3. Go to your back end shell / instance connect session
+4. Stop the current back end from running if it is running (ctrl+C)
+5. Navigate to `backend-database` instead of `backend-json`
+6. Update the hostname in `dbconfig.json` using nano or vim to be the endpoint you just copied. No need for http:// or a port - in fact this is a postgres URL so it's not even using the HTTP protocol anyway.
+
+It should look something like this:
+
+![DB config file](./images/config-db.png)
+
+Now get the database-capable back end running:
+
+1. Stay in the `backend-database` folder
+2. Run `knex migrate:up` to automatically create the required tables in the database
+3. Start the back end with `yarn start`
+
+Now you can visit the same front end as before, and it will access the new back end, which is talking to a database instead of just saving data to a JSON file. Nice!
+
+There is one more missing link before we can retire the server entirely - the back end is still running on it! In fact it is possible for this app to run everything without explicitly handling servers ourselves, and that's what we'll do in the next step.
+
+## Step 9: Running the back end serverlessly with Lambda
+
+Here's how we can replace the back end with a serverless version:
+
+1. Go to your back end instance and stop it (ctrl+C)
+2. Go to the `backend-lambda` folder instead of the `backend-database` one
+3. Copy the db config file: `cp ../backend-database/dbconfig.json dbconfig.json` - this is because the serverless version needs the same DB credentials as the `backend-database` that runs on a server.
+4. Run `yarn deploy` to deploy the serverless app
+
+This will take a little while. Once it's done, you should get an output something like this:
+
+![Serverless output](./images/serverless-output.png)
+
+Copy one of the endpoints to your clipboard, without the /units path at the end. For example:
+
+```
+https://jvhws71uuh.execute-api.ap-southeast-2.amazonaws.com/development
+```
+
+Make sure it starts with "https://" and ends with "/development".
+
+Next we need to tell the front end to point to this new back end.
+
+1. Go to the front end shell
+2. Navigate to the `frontend` folder
+3. Using nano or vim, open `src/config.json` and update the `host` to be the serverless endpoint you copied before
+4. Run `cat src/config.json` to confirm the update worked - you should see the new host printed
+5. Run `sudo yarn build` again to re-build the front end with the new config
+6. Run `aws s3 cp --recursive build s3://example-bucket` again, replacing `example-bucket` with the name of your bucket, to update the statically hosted site with the new config
+
+If all goes to plan, the static site should now point to the lambda endpoint instead of the server back end - you can verify this by checking requests in the Network tab in the Chrome inspector. Don't shut down the server just yet, as it will help us shut down other things for packing up, but in theory we don't need it anymore as everything is running serverlessly (well, not the database, but at least we don't have to manage the server ourselves).
+
+## Step 10: Cleaning everything up
+
+Now it's time to clean things up, so we don't get unexpected charges in a year's time when our AWS free tier expires.
+
+Shutting down the serverless back end:
+
+1. Go to the back end shell / instance connect session
+2. Go to the `backend-lambda` folder
+3. Run `serverless remove` to destroy the serverless application resources
+
+Shutting down the database:
+
+1. Go to the RDS console
+2. Select “DB instances”
+3. Tick the DB you made
+4. Click actions -> delete
+5. Uncheck “create final snapshot” and “retain automated backups”
+6. Check “I acknowledge”
+7. Type “delete me” into the field and click delete
+
+Emptying and deleting the S3 bucket:
+
+1. Go to the S3 console
+2. Tick the bucket you made
+3. Click “empty”
+4. type “permanently delete” and click “empty”
+5. Click “exit”
+6. Tick again if not already ticked
+7. Click “delete”
+8. Type the name of your bucket to confirm deletion then click “delete”
+
+Shutting down the S3 instance:
+
+1. Go to the EC2 console -> instances
+2. Tick the instance you made
+3. Click "instance state" -> "terminate instance"
+4. Click “terminate”
+
+All done - technically there are a few resources still hanging around (e.g. the IAM role we made), but they're free forever and don't really affect anything if they're not in use, so we'll leave them.
+
+Optional: delete your entire AWS account
+
+1. Click your account name in the top right corner
+2. Click “account”
+3. Scroll to the bottom
+4. Check all the checkboxes
+5. Click “close account”
+
+Thanks for following the workshop!!!
