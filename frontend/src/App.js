@@ -1,3 +1,4 @@
+import './App.css';
 import UnitsList from './UnitsList';
 
 function App() {

@@ -29,14 +29,19 @@ function UnitsList() {
   };
 
   return (
-    <div>
+    <div className="units">
+      <div className="list-container">
       {units.map(({ id, name }) => (
-        <div key={id}>
+        <div className="unit" key={id}>
           <div>{name}</div>
+          <button className="button-general" onClick={() => window.open(`https://handbook.monash.edu/2022/units/${name}`)}>Monash handbook</button>
+          <button className="button-general" onClick={() => window.open(`https://studentvip.com.au/monash/subjects/${name}`)}>StudentVIP</button>
           <button onClick={() => deleteUnit(id)}>Delete</button>
         </div>
       ))}
-      <div>
+      {units.length === 0 && <div>No units yet, add one! :)</div>}
+      </div>
+      <div className="input-container">
         <input
           type="text"
           onChange={(event) => setNewText(event.target.value)}

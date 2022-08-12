@@ -1,5 +1,69 @@
+body {
+  background: #146;
+}
+
 .App {
   text-align: center;
+  width: 40vw;
+  margin: 0 auto;
+  background: #eee;
+}
+
+.units {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.list-container {
+  padding: 0 40px;
+}
+
+.unit {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unit button, .input-container button {
+  padding: 10px;
+  font-weight: bold;
+  background: #e06158;
+  border: 0;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.input-container button {
+  background: #4e9174;
+}
+
+.input-container button:hover {
+  background: #8db5a4;
+}
+
+.unit .button-general {
+  background: #628bcc;
+}
+
+.unit .button-general:hover {
+  background: #97c1de;
+}
+
+.unit button:hover {
+  background: #e89e99;
+}
+
+.input-container {
+  padding: 20px;
+}
+
+.input-container input {
+  padding: 5px;
+
 }
 
 .App-logo {
@@ -15,7 +79,8 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: 10vh;
+  margin-top: 2vh;
   display: flex;
   flex-direction: column;
   align-items: center;
