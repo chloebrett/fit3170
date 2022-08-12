@@ -20,6 +20,8 @@ Finally, we'll retire the server entirely by replacing the back end with a serve
 
 There is no need to clone this repo to your local machine - we'll clone it to a remote server to work with in a bit.
 
+There is also no need to have an AWS account yet - we'll walk through the setup as part of the workshop.
+
 Keep this readme open in a browser tab to refer to as we go through the workshop.
 
 Important: you very much need to either do the whole workshop interactively or none of it - as everything we do relies on previous things we did. We'll stop to do some troubleshooting periodically if needed and give people time to catch up, but don't expect that you'll be able to follow along if you join half way in.
