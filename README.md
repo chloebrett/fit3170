@@ -46,6 +46,8 @@ You are already expected to:
 
 Other than that, no specific technologies or languages are assumed knowledge. The app we are running is built in NodeJS on the back end and React on the front end, but you don't actually need to know these in order to get it running. Feel free to poke around the codebase if you like, but understand that it's built to be very simple for the sake of a demo - production applications are a lot more complex and polished.
 
+## Let's get started!
+
 * Step 1: [Setting up your AWS account](./instructions/Step1.md)
 * Step 2: [Launching an EC2 Server](./instructions/Step2.md)
 * Step 3: [Installing the app on the server](./instructions/Step3.md)
