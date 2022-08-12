@@ -2,7 +2,19 @@
 
 Code and instructions for interactive workshop learning AWS EC2, S3, RDS and Lambda
 
-# Instructions
+## What we'll be doing
+
+We'll be deploying a web app that looks like this:
+
+![App screenshot](./images/screenshot.png)
+
+To start with, we'll run everything on an Amazon EC2 server - both the front and back end.
+
+Next, we'll replace the front end with a static website hosted on Amazon S3.
+
+Then, we'll start storing the data on an external database, rather than locally on the server, using Amazon RDS.
+
+Finally, we'll retire the server entirely by replacing the back end with a serverless API hosted on AWS Lambda - leaving us with a purely serverless application that can scale (almost) indefinitely!
 
 ## Getting started
 
