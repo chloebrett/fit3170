@@ -22,3 +22,5 @@ Here are the steps:
 Now, click "go to management console" and log in with your "root user" details.
 
 Finally, you'll see a region listed in the top-right to the left of your account name. Usually by default it is N. Virginia. This is too far away for us - click the region and update it to Asia Pacific (Sydney) which is the closest to us and will result in the fastest load times and lowest server pings.
+
+Next: [Launching an EC2 Server](./instructions/Step2.md)

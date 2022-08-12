@@ -29,3 +29,5 @@ Next we need to tell the front end to point to this new back end.
 6. Run `aws s3 cp --recursive build s3://example-bucket` again, replacing `example-bucket` with the name of your bucket, to update the statically hosted site with the new config
 
 If all goes to plan, the static site should now point to the lambda endpoint instead of the server back end - you can verify this by checking requests in the Network tab in the Chrome inspector. Don't shut down the server just yet, as it will help us shut down other things for packing up, but in theory we don't need it anymore as everything is running serverlessly (well, not the database, but at least we don't have to manage the server ourselves).
+
+Next: [Cleaning everything up](./instructions/Step10.md)
